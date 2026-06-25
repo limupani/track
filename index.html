@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPA Calculator · track</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">track</div>
+    <nav class="nav">
+      <a href="#" class="nav-item" data-page="profile">
+        <span class="nav-dot" aria-hidden="true"></span>My profile
+      </a>
+      <a href="#" class="nav-item is-active" data-page="gpa">
+        <span class="nav-dot" aria-hidden="true"></span>GPA calculator
+      </a>
+      <a href="#" class="nav-item" data-page="timetable">
+        <span class="nav-dot" aria-hidden="true"></span>Timetable
+      </a>
+      <a href="#" class="nav-item" data-page="more">
+        <span class="nav-dot" aria-hidden="true"></span>More
+      </a>
+    </nav>
+    <p class="sidebar-foot">Only GPA calculator is wired up so far.</p>
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <div>
+        <h1>GPA calculator</h1>
+        <p class="subtitle">Add a semester, list its courses, and your CGPA recalculates as you type.</p>
+      </div>
+      <button class="ghost-btn" id="resetBtn" type="button">Clear all data</button>
+    </header>
+
+    <section class="hero" aria-label="CGPA summary">
+
+      <div class="hero-card hero-inputs">
+        <h2 class="hero-eyebrow">Before you started tracking</h2>
+        <div class="field">
+          <label for="startCredit">Credit hours completed</label>
+          <input type="number" id="startCredit" min="0" step="0.5" value="96" inputmode="decimal">
+        </div>
+        <div class="field">
+          <label for="startCGPA">CGPA so far</label>
+          <input type="number" id="startCGPA" min="0" max="4" step="0.01" value="2.23" inputmode="decimal">
+        </div>
+        <p class="hero-hint">Just starting your first semester? Set both to 0.</p>
+      </div>
+
+      <div class="hero-card hero-dial-card">
+        <svg viewBox="0 0 200 200" class="dial-svg" aria-hidden="true">
+          <circle class="dial-track" cx="100" cy="100" r="82"></circle>
+          <circle class="dial-fill" id="dialFill" cx="100" cy="100" r="82"></circle>
+        </svg>
+        <div class="dial-center">
+          <span class="dial-value" id="dialValue">0.00</span>
+          <span class="dial-label">current CGPA</span>
+        </div>
+      </div>
+
+      <div class="hero-card hero-stats">
+        <div class="stat">
+          <span class="stat-value" id="statCredits">0</span>
+          <span class="stat-label">credit hrs attempted</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="statSemesters">0</span>
+          <span class="stat-label">semesters tracked</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="statCourses">0</span>
+          <span class="stat-label">courses logged</span>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="semesters-grid" id="semestersGrid" aria-label="Semesters">
+      <!-- semester cards + the add-semester tile are rendered here by script.js -->
+    </section>
+
+    <p class="session-note">This data lives in your browser tab only — it resets on reload. Ask for a save/load option if you need it to stick around.</p>
+
+  </main>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
