@@ -29,67 +29,117 @@
         <span class="nav-dot" aria-hidden="true"></span>More
       </a>
     </nav>
-    <p class="sidebar-foot">Only GPA calculator is wired up so far.</p>
+    <p class="sidebar-foot">GPA calculator and Timetable are wired up so far.</p>
   </aside>
 
   <main class="main">
 
-    <header class="topbar">
-      <div>
-        <h1>GPA calculator</h1>
-        <p class="subtitle">Add a semester, list its courses, and your CGPA recalculates as you type.</p>
-      </div>
-      <button class="ghost-btn" id="resetBtn" type="button">Clear all data</button>
-    </header>
+    <div class="page" data-page="gpa">
 
-    <section class="hero" aria-label="CGPA summary">
-
-      <div class="hero-card hero-inputs">
-        <h2 class="hero-eyebrow">Before you started tracking</h2>
-        <div class="field">
-          <label for="startCredit">Credit hours completed</label>
-          <input type="number" id="startCredit" min="0" step="0.5" value="96" inputmode="decimal">
+      <header class="topbar">
+        <div>
+          <h1>GPA calculator</h1>
+          <p class="subtitle">Add a semester, list its courses, and your CGPA recalculates as you type.</p>
         </div>
-        <div class="field">
-          <label for="startCGPA">CGPA so far</label>
-          <input type="number" id="startCGPA" min="0" max="4" step="0.01" value="2.23" inputmode="decimal">
-        </div>
-        <p class="hero-hint">Just starting your first semester? Set both to 0.</p>
-      </div>
+        <button class="ghost-btn" id="resetBtn" type="button">Clear all data</button>
+      </header>
 
-      <div class="hero-card hero-dial-card">
-        <svg viewBox="0 0 200 200" class="dial-svg" aria-hidden="true">
-          <circle class="dial-track" cx="100" cy="100" r="82"></circle>
-          <circle class="dial-fill" id="dialFill" cx="100" cy="100" r="82"></circle>
-        </svg>
-        <div class="dial-center">
-          <span class="dial-value" id="dialValue">0.00</span>
-          <span class="dial-label">current CGPA</span>
-        </div>
-      </div>
+      <section class="hero" aria-label="CGPA summary">
 
-      <div class="hero-card hero-stats">
-        <div class="stat">
-          <span class="stat-value" id="statCredits">0</span>
-          <span class="stat-label">credit hrs attempted</span>
+        <div class="hero-card hero-inputs">
+          <h2 class="hero-eyebrow">Before you started tracking</h2>
+          <div class="field">
+            <label for="startCredit">Credit hours completed</label>
+            <input type="number" id="startCredit" min="0" step="0.5" value="96" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="startCGPA">CGPA so far</label>
+            <input type="number" id="startCGPA" min="0" max="4" step="0.01" value="2.23" inputmode="decimal">
+          </div>
+          <p class="hero-hint">Just starting your first semester? Set both to 0.</p>
         </div>
-        <div class="stat">
-          <span class="stat-value" id="statSemesters">0</span>
-          <span class="stat-label">semesters tracked</span>
+
+        <div class="hero-card hero-dial-card">
+          <svg viewBox="0 0 200 200" class="dial-svg" aria-hidden="true">
+            <circle class="dial-track" cx="100" cy="100" r="82"></circle>
+            <circle class="dial-fill" id="dialFill" cx="100" cy="100" r="82"></circle>
+          </svg>
+          <div class="dial-center">
+            <span class="dial-value" id="dialValue">0.00</span>
+            <span class="dial-label">current CGPA</span>
+          </div>
         </div>
-        <div class="stat">
-          <span class="stat-value" id="statCourses">0</span>
-          <span class="stat-label">courses logged</span>
+
+        <div class="hero-card hero-stats">
+          <div class="stat">
+            <span class="stat-value" id="statCredits">0</span>
+            <span class="stat-label">credit hrs attempted</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="statSemesters">0</span>
+            <span class="stat-label">semesters tracked</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="statCourses">0</span>
+            <span class="stat-label">courses logged</span>
+          </div>
         </div>
-      </div>
 
-    </section>
+      </section>
 
-    <section class="semesters-grid" id="semestersGrid" aria-label="Semesters">
-      <!-- semester cards + the add-semester tile are rendered here by script.js -->
-    </section>
+      <section class="semesters-grid" id="semestersGrid" aria-label="Semesters">
+        <!-- semester cards + the add-semester tile are rendered here by script.js -->
+      </section>
 
-    <p class="session-note">This data lives in your browser tab only — it resets on reload. Ask for a save/load option if you need it to stick around.</p>
+      <p class="session-note">This data lives in your browser tab only — it resets on reload. Ask for a save/load option if you need it to stick around.</p>
+
+    </div>
+
+    <div class="page" data-page="timetable" hidden>
+
+      <header class="topbar">
+        <div>
+          <h1>Timetable</h1>
+          <p class="subtitle">Import the timetable sheet, pick out your own classes, and see what's on today.</p>
+        </div>
+        <div class="topbar-actions">
+          <input type="file" id="timetableFile" accept=".xlsx,.xls" data-role="timetable-file" hidden>
+          <button class="ghost-btn" id="clearTimetableBtn" data-role="clear-timetable" type="button" hidden>Clear timetable</button>
+          <button class="ghost-btn" data-role="import-timetable" type="button">Import timetable (.xlsx)</button>
+        </div>
+      </header>
+
+      <section class="tt-empty" id="ttEmpty">
+        <span class="tt-empty-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg>
+        </span>
+        <h2>No timetable imported yet</h2>
+        <p>Download the timetable as an .xlsx file from your university's Google Sheet — File&nbsp;→&nbsp;Download&nbsp;→&nbsp;Microsoft&nbsp;Excel (.xlsx) — then import it here. It's read in your browser only; nothing leaves this tab.</p>
+        <button class="primary-btn" data-role="import-timetable" type="button">Import timetable (.xlsx)</button>
+      </section>
+
+      <section class="tt-picker" id="ttPicker" hidden>
+        <div class="tt-picker-head">
+          <h2>Which classes are yours?</h2>
+          <p>This sheet covers every section in the building — search and check off your own courses. Pick a course once and every day it meets is added automatically.</p>
+        </div>
+        <input type="search" class="tt-picker-search" id="ttPickerSearch" data-role="picker-search" placeholder="Search by course, section or instructor…">
+        <div class="tt-picker-list" id="ttPickerList"><!-- rendered by script.js --></div>
+        <div class="tt-picker-foot">
+          <span id="ttPickerCount">0 selected</span>
+          <button class="primary-btn" data-role="picker-done" type="button">Done</button>
+        </div>
+      </section>
+
+      <section class="tt-schedule" id="ttSchedule" hidden>
+        <div class="tt-toolbar">
+          <div class="day-tabs" id="dayTabs"><!-- rendered by script.js --></div>
+          <button class="ghost-btn" data-role="edit-classes" type="button">Edit my classes</button>
+        </div>
+        <div class="class-grid" id="classGrid"><!-- rendered by script.js --></div>
+      </section>
+
+    </div>
 
   </main>
 
@@ -97,6 +147,7 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
